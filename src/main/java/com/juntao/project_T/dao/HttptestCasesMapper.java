@@ -93,4 +93,6 @@ public interface HttptestCasesMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(HttptestCases record);
+
+    List<HttptestCases> selectCasesList(Long teamid);
 }

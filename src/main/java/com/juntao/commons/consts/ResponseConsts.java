@@ -165,4 +165,5 @@ public class ResponseConsts {
 	public static final Pair<String, String> INCLUDE_ONLINE_BANNER_ERR = Pair.of("2006", "该商品组有关联运营位，不能删除哦");
 	public static final Pair<String, String> INCLUDE_ONLINE_SHLF_ERR = Pair.of("2007", "该商品组里有关联货架，不能删除哦");
 	public static final Pair<String, String> SKU_GRP_DEL_CHECKED_ERR = Pair.of("2008", "已有审核通过记录的商品不能删除哦");
+	public static final Pair<String, String> CASENO_NOT_EXIST = Pair.of("1001", "该CaseNo不存在");
 }
