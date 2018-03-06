@@ -59,7 +59,7 @@ public class HttpInterfaceTest {
 		ResponseVo Response = new ResponseVo<>();
 
 		if (StringUtils.isBlank(caseNo) || StringUtils.isEmpty(caseNo)) {
-			return Response = new ResponseVo(ResponseConsts.REQUEST_PARAM_ERROR, null);
+			return Response = new ResponseVo(ResponseConsts.CASENO_NOT_EXIST, null);
 		}
 
 		HttptestCases testCaseDetail = httptestcase.selectByPrimaryKey(Long.parseLong(caseNo));
