@@ -4,15 +4,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
 import org.apache.commons.beanutils.BeanUtils;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.juntao.commons.consts.ResponseConsts;
@@ -51,8 +50,7 @@ public class HttpInterfaceTest {
 	}
 
 	@RequestMapping(value = "/httpTestcase/detail", method = RequestMethod.GET)
-	public ResponseVo<HttptestCasesVoOut> getTestCaseDetail(
-			@NotBlank(message = "caseNo不可为空") @NotNull(message = "caseNo不可为null") @NotEmpty(message = "caseNo不可为empty") String caseNo)
+	public ResponseVo<HttptestCasesVoOut> getTestCaseDetail(String caseNo)
 			throws IllegalAccessException, InvocationTargetException {
 		// httpTestcase?caseNp={caseNo}&caseName={caseName}
 		// 这种多个参数的情况的GET入参,(String caseName,String caseName)写多个入参几个,
@@ -60,8 +58,8 @@ public class HttpInterfaceTest {
 
 		ResponseVo Response = new ResponseVo<>();
 
-		if (caseNo.equals(null)) {
-			return Response = Response = new ResponseVo(ResponseConsts.REQUEST_PARAM_ERROR, null);
+		if (StringUtils.isBlank(caseNo) || StringUtils.isEmpty(caseNo)) {
+			return Response = new ResponseVo(ResponseConsts.REQUEST_PARAM_ERROR, null);
 		}
 
 		HttptestCases testCaseDetail = httptestcase.selectByPrimaryKey(Long.parseLong(caseNo));
@@ -82,13 +80,15 @@ public class HttpInterfaceTest {
 	}
 
 	@RequestMapping(value = "/httpTestcase/create", method = RequestMethod.POST)
-	public String saveTestCase(@RequestBody InsertTestCase InsertTestCase)
+	public @ResponseBody ResponseVo<?> saveTestCase(@RequestBody @Validated InsertTestCase InsertTestCase)
 			throws IllegalAccessException, InvocationTargetException {
+		
+		ResponseVo Response = new ResponseVo<>();
 
 		HttptestCases po = new HttptestCases();
 		BeanUtils.copyProperties(po, InsertTestCase);
 		httptestcase.insert(po);
 
-		return "操作成功";
+		return new ResponseVo<>(ResponseConsts.SUCCESS,null);
 	}
 }
