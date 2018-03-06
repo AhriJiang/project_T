@@ -4,13 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.juntao.commons.consts.ToStringObject;
 
 public class InsertTestCase extends ToStringObject implements Serializable {
 	
-	@Size(min=1,max=20,message="创建者名称长度1~20")
+	@Length(min=1,max=20,message="创建者名称长度1~20")
     private String creator;
 
     private Date created;

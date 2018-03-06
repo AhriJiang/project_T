@@ -82,13 +82,13 @@ public class HttpInterfaceTest {
 	@RequestMapping(value = "/httpTestcase/create", method = RequestMethod.POST)
 	public @ResponseBody ResponseVo<?> saveTestCase(@RequestBody @Validated InsertTestCase InsertTestCase)
 			throws IllegalAccessException, InvocationTargetException {
-		
+
 		ResponseVo Response = new ResponseVo<>();
 
 		HttptestCases po = new HttptestCases();
 		BeanUtils.copyProperties(po, InsertTestCase);
 		httptestcase.insert(po);
 
-		return new ResponseVo<>(ResponseConsts.SUCCESS,null);
+		return new ResponseVo<>(ResponseConsts.SUCCESS, null);
 	}
 }
