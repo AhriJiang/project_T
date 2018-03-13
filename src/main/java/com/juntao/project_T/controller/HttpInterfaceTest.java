@@ -18,7 +18,7 @@ import com.juntao.commons.consts.ResponseConsts;
 import com.juntao.commons.vo.out.ResponseVo;
 import com.juntao.project_T.dao.HttptestCasesMapper;
 import com.juntao.project_T.entity.HttptestCases;
-import com.juntao.project_T.vo.in.InsertTestCase;
+import com.juntao.project_T.vo.in.HttptestCasesVoIn;
 import com.juntao.project_T.vo.out.HttptestCasesVoOut;
 
 @RestController
@@ -80,7 +80,7 @@ public class HttpInterfaceTest {
 	}
 
 	@RequestMapping(value = "/httpTestcase/create", method = RequestMethod.POST)
-	public @ResponseBody ResponseVo<?> saveTestCase(@RequestBody @Validated InsertTestCase InsertTestCase)
+	public @ResponseBody ResponseVo<?> saveTestCase(@RequestBody @Validated HttptestCasesVoIn InsertTestCase)
 			throws IllegalAccessException, InvocationTargetException {
 
 		ResponseVo Response = new ResponseVo<>();
